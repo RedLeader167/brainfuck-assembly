@@ -4,12 +4,12 @@ if len(sys.argv) < 3:
     print('Usage: python basm.py <input file> <output file>')
     exit()
 
-print('brainfuck!assembly version 1.0')
+print('brainfuck!assembly version 1.1a')
 
 basm = open(sys.argv[1]).read()
 basm = basm.replace('\t', ' ')
 
-finalbppc = 'bf/bf!asm v1\n'
+finalbppc = 'bf/bf!asm v1_1a\n'
 finalbpp = ''
 
 funcmode = 0
@@ -163,6 +163,19 @@ for line in lines:
                 if args[1].isdigit() and args[2].isdigit():
                     args[1] = int(args[1])
                     args[2] = int(args[2])
+                    
+                    if args[2] > 0: 
+                        for i in range(args[2]): 
+                            addv(">")
+                        addv("+[-]")
+                        for i in range(args[2]): 
+                            addv("<")
+                    if args[2] < 0:
+                        for i in range(args[2]): 
+                            addv("<")
+                        addv("+[-]")
+                        for i in range(args[2]): 
+                            addv(">")
                     
                     if args[1] == 0 or args[2] == 0:
                         print('Compiler error: cannot move cell value to self or use self as buffer.')
