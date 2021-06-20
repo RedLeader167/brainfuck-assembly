@@ -38,4 +38,4 @@ call String      : calls function
 
 # How to use:
 
-Compiling: python basm.py inputFile.basm outputFile.bf
+Compiling: python asm.py inputFile.basm outputFile.bf
