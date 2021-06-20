@@ -128,6 +128,116 @@ for line in lines:
             else:
                 print('Compiler error: call instruction without string passed.')
                 exit()
+        elif args[0] == 'clm':
+            if len(args) > 1:
+                if args[1].isdigit():
+                    args[1] = int(args[1])
+                    
+                    if args[1] == 0:
+                        print('Compiler error: cannot move cell value to self')
+                        exit()
+                    elif args[1] > 0:
+                        addv("[")
+                        for i in range(args[1]):
+                            addv(">")
+                        addv("+")
+                        for i in range(args[1]):
+                            addv("<")
+                        addv("-]")
+                    elif args[1] < 0:
+                        addv("[")
+                        for i in range(args[1]):
+                            addv("<")
+                        addv("+")
+                        for i in range(args[1]):
+                            addv(">")
+                        addv("-]")
+                else:
+                    print('Compiler error: clm instruction argument is invalid and not int.')
+                    exit()
+            else:
+                print('Compiler error: clm instruction without int passed.')
+                exit()
+        elif args[0] == 'clc':
+            if len(args) > 2:
+                if args[1].isdigit() and args[2].isdigit():
+                    args[1] = int(args[1])
+                    args[2] = int(args[2])
+                    
+                    if args[1] == 0 or args[2] == 0:
+                        print('Compiler error: cannot move cell value to self or use self as buffer.')
+                        exit()
+                    elif args[1] > 0:
+                        addv("[")
+                        for i in range(args[1]):
+                            addv(">")
+                        addv("+")
+                        for i in range(args[1]):
+                            addv("<")
+                        if args[2] > 0:
+                            for i in range(args[2]):
+                                addv(">")
+                            addv("+")
+                            for i in range(args[2]):
+                                addv("<")
+                        elif args[2] < 0:
+                            for i in range(args[2]):
+                                addv("<")
+                            addv("+")
+                            for i in range(args[2]):
+                                addv(">")
+                        addv("-]")
+                    elif args[1] < 0:
+                        addv("[")
+                        for i in range(args[1]):
+                            addv("<")
+                        addv("+")
+                        for i in range(args[1]):
+                            addv(">")
+                        if args[2] > 0:
+                            for i in range(args[2]):
+                                addv(">")
+                            addv("+")
+                            for i in range(args[2]):
+                                addv("<")
+                        elif args[2] < 0:
+                            for i in range(args[2]):
+                                addv("<")
+                            addv("+")
+                            for i in range(args[2]):
+                                addv(">")
+                        addv("-]")
+                    
+                    for i in range(args[2]):
+                        if args[2] > 0: addv(">")
+                        if args[2] < 0: addv("<")
+                    
+                    if args[2] > 0:
+                        addv("[")
+                        for i in range(args[2]):
+                            addv("<")
+                        addv("+")
+                        for i in range(args[2]):
+                            addv(">")
+                        addv("-]")
+                    elif args[2] < 0:
+                        addv("[")
+                        for i in range(args[2]):
+                            addv(">")
+                        addv("+")
+                        for i in range(args[2]):
+                            addv("<")
+                        addv("-]")
+                        
+                    for i in range(args[2]):
+                        if args[2] > 0: addv("<")
+                        if args[2] < 0: addv(">")
+                else:
+                    print('Compiler error: clm instruction arguments is invalid and not int.')
+                    exit()
+            else:
+                print('Compiler error: clm instruction without 2 ints passed.')
+                exit()
         else:
             print('Compiler error: instruction ' + args[0] + ' is not a valid instruction.')
             exit()
