@@ -35,6 +35,9 @@ endfunc          : ends function
 
 call String      : calls function
 
+clm # : moves cell value from current to cell with offset # (can be negative)
+
+clc #, 2# : copies cell value to cell with offset #, cell 2# will be nullified
 
 # How to use:
 
